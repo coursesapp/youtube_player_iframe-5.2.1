@@ -519,11 +519,6 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
   }
 
   @override
-  Future<void> getVideo() {
-    return _run('');
-  }
-
-  @override
   Future<void> playVideo() {
     return _run('playVideo');
   }
