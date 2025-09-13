@@ -52,14 +52,16 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
       },
     );
 
-    webViewController = WebViewController.fromPlatformCreationParams(
-      webViewParams,
-    )
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setNavigationDelegate(navigationDelegate)
-      ..setUserAgent(params.userAgent)
-      ..addJavaScriptChannel(playerId, onMessageReceived: _eventHandler.call)
-      ..enableZoom(false);
+    webViewController =
+        WebViewController.fromPlatformCreationParams(webViewParams)
+          ..setJavaScriptMode(JavaScriptMode.unrestricted)
+          ..setNavigationDelegate(navigationDelegate)
+          ..setUserAgent(params.userAgent)
+          ..addJavaScriptChannel(
+            playerId,
+            onMessageReceived: _eventHandler.call,
+          )
+          ..enableZoom(false);
 
     final webViewPlatform = webViewController.platform;
     if (webViewPlatform is AndroidWebViewController) {
@@ -280,10 +282,7 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
     );
   }
 
-  Future<void> _run(
-    String functionName, {
-    Map<String, dynamic>? data,
-  }) async {
+  Future<void> _run(String functionName, {Map<String, dynamic>? data}) async {
     await _initCompleter.future;
 
     final varArgs = await _prepareData(data);
@@ -465,9 +464,9 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
   Future<List<double>> get availablePlaybackRates async {
     final rates = await _evalWithResult('getAvailablePlaybackRates()');
 
-    return List<num>.from(jsonDecode(rates))
-        .map((r) => r.toDouble())
-        .toList(growable: false);
+    return List<num>.from(
+      jsonDecode(rates),
+    ).map((r) => r.toDouble()).toList(growable: false);
   }
 
   @override
