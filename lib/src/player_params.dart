@@ -115,7 +115,7 @@ class YoutubePlayerParams {
     this.mute = false,
     this.captionLanguage = 'en',
     this.enableCaption = true,
-    this.pointerEvents = PointerEvents.none,
+    this.pointerEvents = PointerEvents.initial,
     this.color = 'white',
     this.showControls = true,
     this.enableKeyboard = kIsWeb,
